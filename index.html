@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bole Cafe | The Ultimate Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- RESET & LIGHT THEME VARIABLES (Softened White) --- */
+        :root {
+            --primary-bg: #fcfcfc; /* Soft Off-White (Less harsh than #fff) */
+            --secondary-bg: #f2f2f2; /* Soft Light Gray for section backgrounds */
+            --accent-gradient: linear-gradient(135deg, #cfa42f 0%, #a88427 100%); /* Deep Gold */
+            --accent-color: #cfa42f; /* Deep Gold */
+            --glass-bg: rgba(252, 252, 252, 0.8); /* Near White, subtle transparency */
+            --glass-border: rgba(0, 0, 0, 0.1); /* Light border */
+            --text-main: #1f1f1f; /* Dark text */
+            --text-muted: #525252; /* Muted dark gray text */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Outfit', sans-serif;
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { width: 100%; height: auto; display: block; }
+
+        /* --- UTILITY CLASSES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .text-gradient {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* Enhanced Glass Card Hover for Light Mode */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Lighter initial shadow */
+        }
+
+        .glass-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: var(--accent-color);
+            /* Lighter, subtle shadow and gold glow */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1), 0 0 30px rgba(207, 164, 47, 0.5); 
+            background: var(--primary-bg); 
+        }
+
+        /* Title Glow Animation - Adjusted for Light Background */
+        .heading-xl {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+            animation: pulse-glow-light 4s infinite alternate; 
+        }
+
+        @keyframes pulse-glow-light {
+            0% { transform: scale(1); text-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
+            100% { transform: scale(1.005); text-shadow: 0 0 15px rgba(0, 0, 0, 0.2); }
+        }
+
+        .heading-lg {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 36px; 
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            z-index: 1;
+        }
+        
+        /* Button Primary (Gold) */
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #fff; /* White text on dark gold button */
+            box-shadow: 0 8px 20px rgba(207, 164, 47, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(207, 164, 47, 0.8);
+        }
+
+        /* Button Outline */
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--text-main); /* Dark text on outline button */
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: #fff; /* White text on hover */
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px); 
+            transition: 1.2s all ease-out; 
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: 0.3s;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            /* Using a matching soft white background */
+            background: rgba(252, 252, 252, 0.95); 
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            color: var(--text-main); /* Dark logo text */
+        }
+        
+        .logo span { color: var(--accent-color); }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            /* Ensures transition properties are ready */
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, opacity 0.4s ease-in;
+        }
+        
+        .nav-menu li {
+            width: 100%; /* Important for mobile list item separation */
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main); /* Dark link text */
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+            display: block; /* Ensures full click area on mobile */
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent-gradient);
+            transition: 0.4s;
+        }
+
+        .nav-link:hover { color: var(--accent-color); }
+        .nav-link:hover::after { width: 100%; }
+
+        .hero-image-gallery .hero-img {
+            filter: brightness(1);
+        }
+
+        /* --- CUSTOM HAMBURGER MENU STYLES --- */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 30px; /* Standard size */
+            height: 24px;
+            position: relative;
+            z-index: 1001; /* Ensure it's above the menu */
+        }
+
+        .hamburger .bar {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-main);
+            border-radius: 2px;
+            position: absolute;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .hamburger .bar:nth-child(1) { top: 0; }
+        .hamburger .bar:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .hamburger .bar:nth-child(3) { bottom: 0; }
+
+        /* Animation State: Transform into 'X' */
+        .hamburger.open .bar:nth-child(1) {
+            transform: translateY(10.5px) rotate(45deg); /* Move down and rotate */
+            background-color: var(--accent-color);
+        }
+        .hamburger.open .bar:nth-child(2) {
+            opacity: 0; /* Fade out middle bar */
+        }
+        .hamburger.open .bar:nth-child(3) {
+            transform: translateY(-10.5px) rotate(-45deg); /* Move up and rotate */
+            background-color: var(--accent-color);
+        }
+        /* --- END HAMBURGER STYLES --- */
+
+
+        /* --- HERO SECTION (NEW GRID LAYOUT) --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: var(--primary-bg); /* Clean background */
+            padding-top: 80px; /* Account for fixed navbar */
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 50/50 split */
+            gap: 4rem;
+            align-items: center;
+            height: 100%;
+            width: 100%; /* Ensures it fills container width */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: left; /* Text aligned to the left */
+            margin: 0; 
+        }
+        
+        .hero-subtitle {
+            color: var(--accent-color);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .hero-content p {
+            color: var(--text-muted); 
+            font-size: 1.1rem; 
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        /* Animated Image Gallery */
+        .hero-image-gallery {
+            position: relative;
+            height: 80vh; 
+            max-height: 700px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .hero-image-gallery:hover {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Dual Image setup for Cross-Fade */
+        .hero-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* SLOW, SMOOTH CROSS-FADE TRANSITION (1.5 seconds) */
+            transition: opacity 1.5s ease-in-out, transform 0.5s; 
+            opacity: 0; /* Hidden by default */
+            z-index: 1;
+        }
+
+        /* Make the active image stand out */
+        .hero-img.active {
+            opacity: 1;
+            z-index: 2;
+            /* Subtle breathing animation for the active image */
+            animation: breathing-scale 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes breathing-scale {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
+        }
+        
+        /* --- END HERO SECTION --- */
+
+
+        /* --- ABOUT SECTION --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img-wrapper {
+            position: relative;
+        }
+
+        .about-img {
+            height: 100%; /* Ensure image fills container */
+            width: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: -20px 20px 0px var(--accent-color);
+            transition: 0.5s;
+        }
+        
+        .about-img-wrapper:hover .about-img {
+            transform: translate(5px, -5px);
+            box-shadow: -15px 15px 0px var(--accent-color);
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: 20px;
+            right: -20px;
+            background: var(--accent-gradient);
+            color: #fff; /* White text on gold badge */
+            padding: 1.5rem;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: 700;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite alternate; 
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+        
+        /* About section list text color */
+        .about-grid p, .about-grid li {
+            color: var(--text-muted);
+        }
+
+        /* --- MENU SECTION (SLIDER UPDATE) --- */
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        /* Menu Tab Hover Effect */
+        .menu-tab {
+            padding: 10px 25px;
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-main); /* Dark text */
+        }
+
+        .menu-tab.active, .menu-tab:hover {
+            background: var(--accent-gradient);
+            color: #fff; /* White text on gold tab */
+            border-color: transparent;
+            transform: scale(1.05); 
+        }
+
+        /* Slider Wrapper */
+        .menu-slider-wrapper {
+            position: relative;
+            padding: 0 40px; 
+        }
+
+        /* Flex container instead of Grid for sliding */
+        .menu-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0 2rem 0; 
+            scroll-behavior: smooth;
+            scrollbar-width: none; 
+        }
+        
+        .menu-grid::-webkit-scrollbar {
+            display: none; 
+        }
+
+        /* Fixed width for items to ensure they slide */
+        .menu-item {
+            min-width: 320px;
+            flex: 0 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* Slider Arrows - Darker on light background */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            color: var(--text-main); /* Dark icon */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+            font-size: 1.4rem;
+        }
+        
+        .slider-btn:hover {
+            background: var(--accent-color);
+            color: #fff; /* White icon on hover */
+            box-shadow: 0 0 20px rgba(207, 164, 47, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .slider-btn.prev { left: 0; }
+        .slider-btn.next { right: 0; }
+
+
+        /* --- FEATURES SECTION --- */
+        .features-wrapper {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .feature-box {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(252,252,252,0) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: var(--transition);
+        }
+
+        /* Feature Box Hover Effect */
+        .feature-box:hover {
+            transform: translateY(-20px) rotateX(5deg); 
+            background: linear-gradient(180deg, rgba(207, 164, 47, 0.15) 0%, rgba(252,252,252,0) 100%);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); /* Lighter shadow */
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- PRIVATE DINING (Replaces Gallery) --- */
+        .events-grid-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+        .events-image-col {
+            position: relative;
+        }
+
+        /* Block 2 Reverse Layout (Text Left, Image Right on Desktop) */
+        .events-grid-item.reverse-layout .events-image-col {
+            grid-column: 2; /* Image column position */
+            grid-row: 1;
+        }
+        .events-grid-item.reverse-layout .events-text-col {
+            grid-column: 1; /* Text column position */
+            grid-row: 1;
+        }
+        
+        /* Event Image Container (Wrapper for Hover Effect) */
+        .events-img-wrapper {
+            position: relative;
+        }
+
+        /* Event Image Hover Logic */
+        /* Image Left (Wedding) - Shadow on Bottom-Right */
+        .events-grid-item:not(.reverse-layout) .events-img-wrapper .about-img {
+            box-shadow: 20px 20px 0px var(--accent-color);
+        }
+        .events-grid-item:not(.reverse-layout) .events-img-wrapper:hover .about-img {
+            transform: translate(-5px, 5px); /* Move towards top-left */
+            box-shadow: 15px 15px 0px var(--accent-color);
+        }
+
+        /* Image Right (Private Dining) - Shadow on Bottom-Left */
+        .events-grid-item.reverse-layout .events-img-wrapper .about-img {
+            box-shadow: -20px 20px 0px var(--accent-color);
+        }
+        .events-grid-item.reverse-layout .events-img-wrapper:hover .about-img {
+            transform: translate(5px, 5px); /* Move towards top-right */
+            box-shadow: -15px 15px 0px var(--accent-color);
+        }
+
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .heading-xl { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-img-wrapper { order: -1; } /* Image first on mobile for About section */
+
+            /* --- NEW HERO MOBILE STYLES: Image as Background --- */
+            .hero { 
+                height: 100vh; /* Full viewport height */
+                padding-top: 0; 
+                display: flex;
+                position: relative;
+            }
+            
+            .hero-grid { 
+                grid-template-columns: 1fr; 
+                height: 100%;
+                position: relative;
+            }
+            
+            .hero-image-gallery { 
+                position: absolute; 
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0; /* Behind content */
+                border-radius: 0; 
+                box-shadow: none;
+                transform: none; /* No tilt */
+            }
+
+            /* Dimming overlay for readability (the "yellow thing on background") */
+            .hero-image-gallery::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                /* Darker overlay for contrast */
+                background: rgba(0, 0, 0, 0.5); 
+                z-index: 1;
+            }
+
+            .hero-content { 
+                order: 1; 
+                z-index: 2; /* Above overlay */
+                padding: 25vh 2rem; /* Center content vertically */
+                text-align: center;
+                width: 100%;
+                margin: 0;
+                
+                /* Ensure content colors work on dark background */
+                background: none; 
+                backdrop-filter: none;
+            }
+            
+            /* Force white/gold text on top of the image */
+            .hero-content .hero-subtitle, 
+            .hero-content p {
+                color: #fff !important; 
+                text-shadow: 0 1px 5px rgba(0,0,0,0.7); 
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem !important; 
+                color: #fff !important;
+                text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+                animation: none; /* Disable original glow animation for legibility */
+            }
+            /* Set gradient text to gold accent color for contrast */
+            .hero-content .text-gradient {
+                -webkit-background-clip: unset;
+                -webkit-text-fill-color: var(--accent-color); 
+                background: none;
+                text-shadow: none; /* Remove text shadow on gradient parts */
+            }
+
+            .hero-buttons {
+                justify-content: center; /* Center buttons */
+                flex-direction: row; 
+                gap: 1rem;
+                margin-top: 1.5rem;
+            }
+            .hero-buttons .btn {
+                width: 48%; 
+                padding: 10px 20px;
+                font-size: 0.8rem;
+            }
+            /* --- END NEW HERO MOBILE STYLES --- */
+            
+            /* New Events Grid Mobile Stacking */
+            .events-grid-item {
+                grid-template-columns: 1fr;
+                margin-bottom: 3rem;
+            }
+            /* Reset specific column/row settings for mobile stacking */
+            .events-grid-item.reverse-layout .events-image-col,
+            .events-grid-item.reverse-layout .events-text-col {
+                grid-column: auto;
+                grid-row: auto;
+            }
+            /* Make sure the image is always first on mobile, for both blocks */
+            .events-image-col { order: -1; } 
+
+            .navbar { padding: 1rem 5%; background: rgba(252, 252, 252, 0.95); }
+            
+            /* --- ANIMATED MOBILE MENU STYLES --- */
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary-bg); /* Use soft background for mobile menu */
+                flex-direction: column;
+                z-index: 1000;
+                
+                /* Animated Properties: Start hidden */
+                max-height: 0; /* Critical for slide animation */
+                padding: 0 2rem; /* Start with zero vertical padding */
+                opacity: 0;
+                overflow: hidden; /* Hide content while sliding */
+            }
+            
+            .nav-menu.active { 
+                /* End state: Fully visible and padded */
+                max-height: 500px; /* Sufficient height to cover all links */
+                padding: 2rem; /* Apply full padding */
+                opacity: 1;
+            }
+            
+            /* Add separator for links in the mobile menu */
+            .nav-menu li {
+                padding: 0.75rem 0;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            .nav-menu li:last-child {
+                 border-bottom: none;
+            }
+            
+            /* Show custom hamburger */
+            .hamburger { display: block; } 
+            
+            .contact-form { padding: 2rem; }
+            /* Mobile slider adjust */
+            .menu-slider-wrapper { padding: 0; }
+            .slider-btn { display: none; } 
+            .menu-grid { padding-left: 1rem; padding-right: 1rem; }
+        }
+
+        /* Blur & darken hero background images on mobile */
+        .hero-image-gallery .hero-img {
+            filter: brightness(0.5);
+            transform: scale(1.1); /* prevents edge blur gaps */
+        }
+        
+        /* --- REVIEWS --- */
+        .reviews-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding-bottom: 2rem;
+            scrollbar-width: none; 
+        }
+        .reviews-slider::-webkit-scrollbar { display: none; } 
+
+        .review-card {
+            min-width: 350px;
+            background: var(--secondary-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        }
+        
+        .review-card:hover {
+            transform: translateY(-8px) rotateZ(-1deg); 
+            border-left-width: 8px; 
+            border-color: var(--accent-color); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2), 0 0 20px rgba(207, 164, 47, 0.3); 
+            background: #efefef; /* Softened hover background */
+        }
+        
+        .review-card p {
+            color: var(--text-muted); /* Darker muted text */
+        }
+
+        .stars { color: #FFD700; margin-bottom: 1rem; }
+
+        /* --- CONTACT & MAP --- */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--secondary-bg);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .contact-form {
+            flex: 1;
+            padding: 4rem;
+            min-width: 400px;
+        }
+
+        .contact-map {
+            flex: 1;
+            min-width: 400px;
+            min-height: 400px;
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main); /* Dark text in input */
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(207, 164, 47, 0.4);
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            background: var(--secondary-bg); /* Light footer */
+            padding: 4rem 0 2rem;
+            border-top: 1px solid #ddd;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        /* Ensure dark text in footer links/headings */
+        .footer-grid h4 {
+            color: var(--text-main);
+        }
+        .footer-grid p, .footer-grid ul li, .footer-grid a {
+            color: var(--text-muted) !important;
+        }
+        .footer-grid a:hover {
+            color: var(--accent-color) !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="logo">Bole<span>Cafe</span>.</a>
+        
+        <!-- Custom Hamburger Menu HTML -->
+        <div class="hamburger" id="mobile-menu-btn">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="#hero" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#menu" class="nav-link">Menu</a></li>
+            <li><a href="#features" class="nav-link">Features</a></li>
+            <li><a href="#private-dining" class="nav-link">Private Dining</a></li> 
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="display: none; @media(min-width: 900px){display:block;}">Book Table</a>
+    </nav>
+
+    <!-- Hero Section (NEW GRID LAYOUT) -->
+    <header id="hero" class="hero">
+        <div class="container hero-grid">
+            <!-- Left Column: Text Content -->
+            <div class="hero-content reveal active">
+                <span class="hero-subtitle">Est. 2024 • Nekemte</span>
+                <!-- Text aligned left naturally by hero-content styles -->
+                <h1 class="heading-xl">Experience the <br><span class="text-gradient">Taste of Excellence</span></h1>
+                <p>
+                    Where traditional Ethiopian hospitality meets modern culinary artistry. 
+                    Indulge in our signature roasts and gourmet dishes in an atmosphere of pure elegance.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#menu" class="btn btn-primary">View Full Menu</a>
+                    <a href="#contact" class="btn btn-outline">Book A Table</a>
+                </div>
+            </div>
+
+            <!-- Right Column: Animated Image Gallery (Now uses two images for cross-fade) -->
+            <div class="hero-image-gallery reveal active">
+                <!-- Image 1: Initially active -->
+                <img id="hero-img-1" 
+                     src="images/coffee.jfif" 
+                     class="hero-img active">
+                
+                <!-- Image 2: Initially hidden, used to load the next image -->
+                <img id="hero-img-2" 
+                     src="images/cake.jpg" 
+                     class="hero-img">
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="about-grid">
+                <div class="reveal">
+                    <span class="text-gradient" style="font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Our Story</span>
+                    <h2 class="heading-lg">A Sanctuary for <br>Coffee Lovers</h2>
+                    <p style="margin-bottom: 1.5rem;">
+                        Located in the heart of Bole, we bring you an immersive dining experience. 
+                        Our beans are sourced directly from the finest highlands, and our chefs craft 
+                        every dish with passion and precision.
+                    </p>
+                    <p style="margin-bottom: 2rem;">
+                        Whether you are here for a quick morning brew or a luxurious evening dinner, 
+                        Bole Cafe promises an unforgettable journey for your palate.
+                    </p>
+                    <ul style="margin-bottom: 2rem;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> Premium Organic Beans</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> Award-Winning Chefs</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> Elegant Atmosphere</li>
+                    </ul>
+                    <a href="#menu" class="btn btn-outline">Read Our Story</a>
+                </div>
+                <div class="about-img-wrapper reveal">
+                    <img src="images/images.jfif" alt="Bole Cafe Interior" class="about-img">
+                    <div class="about-badge">
+                        <span>Est.<br>2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Highlights -->
+    <section id="menu" class="section-padding" style="background: var(--secondary-bg);">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;" class="reveal">
+                <span class="text-gradient" style="font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Discover</span>
+                <h2 class="heading-lg">Menu Highlights</h2>
+            </div>
+
+            <!-- Slider Wrapper -->
+            <div class="menu-slider-wrapper reveal">
+                <!-- Navigation Arrows -->
+                <div class="slider-btn prev" onclick="scrollMenu(-1)"><i class="fas fa-chevron-left"></i></div>
+                <div class="slider-btn next" onclick="scrollMenu(1)"><i class="fas fa-chevron-right"></i></div>
+                
+                <!-- Menu Container (Flex) -->
+                <div class="menu-grid" id="menu-slider">
+                    <!-- Card 1 -->
+                    <div class="glass-card menu-item">
+                        <img src="images/foods/wagyu-burger.jpg" alt="Food" class="menu-img">
+                        <div class="menu-header">
+                            <h3 style="font-size: 1.4rem; font-family: var(--font-heading);">Wagyu Burger</h3>
+                            <span class="price">400 birr</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Truffle aioli, aged cheddar, brioche bun.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="glass-card menu-item">
+                        <img src="images/foods/Pizza.jfif" alt="Pizza" class="menu-img">
+                        <div class="menu-header">
+                            <h3 style="font-size: 1.4rem; font-family: var(--font-heading);">Cheese Pizza</h3>
+                            <span class="price">320 birr</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Fresh dough, tomato sauce, and mozzarella cheese.</p>
+                    </div>
+
+                    <div class="glass-card menu-item">
+                        <img src="images/foods/French-Fries.avif" alt="Fries" class="menu-img">
+                        <div class="menu-header">
+                            <h3 style="font-size: 1.4rem; font-family: var(--font-heading);">French Fries</h3>
+                            <span class="price">100 birr</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Crispy golden fries with a pinch of salt.</p>
+                      </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section-padding">
+        <div class="container">
+            <div class="features-wrapper">
+                <div class="feature-box reveal">
+                    <i class="fas fa-mug-hot feature-icon"></i>
+                    <h3>Master Roasters</h3>
+                    <p style="color: var(--text-muted);">We roast our beans in-house daily for freshness.</p>
+                </div>
+                <div class="feature-box reveal">
+                    <i class="fas fa-utensils feature-icon"></i>
+                    <h3>Fresh Ingredients</h3>
+                    <p style="color: var(--text-muted);">Farm-to-table approach for all our dishes.</p>
+                </div>
+                <div class="feature-box reveal">
+                    <i class="fas fa-wifi feature-icon"></i>
+                    <h3>Fast Wifi</h3>
+                    <p style="color: var(--text-muted);">Perfect environment for work and meetings.</p>
+                </div>
+                <div class="feature-box reveal">
+                    <i class="fas fa-music feature-icon"></i>
+                    <h3>Live Music</h3>
+                    <p style="color: var(--text-muted);">Enjoy smooth jazz weekends at Bole Cafe.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="background: url('images/download.jfif'); background-size: cover; background-attachment: fixed; padding: 100px 0; position: relative;">
+        <!-- Softened overlay to match new primary color -->
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(252,252,252,0.7);"></div> 
+        <div class="container" style="position: relative; z-index: 2; text-align: center;">
+            <h2 class="heading-lg" style="color: var(--text-main);">Ready for the Experience?</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Book your table now and enjoy a memorable evening.</p>
+            <a href="#contact" class="btn btn-primary">Make A Reservation</a>
+        </div>
+    </section>
+
+    <!-- NEW: Private Dining & Events Section (Replaces Gallery) -->
+    <section id="private-dining" class="section-padding">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 5rem;" class="reveal">
+                <span class="text-gradient">Special Occasions</span>
+                <h2 class="heading-lg">Private Events & Catering</h2>
+            </div>
+
+            <!-- Block 1: Weddings (Image Left, Text Right on Desktop) -->
+            <div class="events-grid-item">
+                <div class="events-image-col events-img-wrapper reveal">
+                    <img src="images/weddings.jpg" alt="Elegant wedding reception setup" class="about-img" style="border-radius: 12px; height: 400px; margin-bottom: 0;">
+                </div>
+                <div class="events-text-col reveal">
+                    <span class="text-gradient" style="font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Your Dream Day</span>
+                    <h2 class="heading-lg" style="font-size: 2.2rem;">Weddings & Large Celebrations</h2>
+                    <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
+                        Our elegant venue provides the perfect backdrop for your most cherished moments. 
+                        From intimate receptions to grand wedding banquets, our dedicated events team 
+                        will tailor every detail—from the gourmet menu to the floral arrangements—to 
+                        ensure your day is absolutely flawless and unforgettable. You can trust 
+                        Bole Cafe to handle every detail with precision.
+                    </p>
+                    <ul style="margin-bottom: 2rem;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> Customizable Menu Packages</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> Seating for up to 150 Guests</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> Dedicated Event Coordinator</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Inquire About Venue</a>
+                </div>
+            </div>
+
+            <!-- Block 2: Corporate/Private Dining (Text Left, Image Right on Desktop) -->
+            <div class="events-grid-item reverse-layout">
+                <div class="events-text-col reveal">
+                    <span class="text-gradient" style="font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Intimate Gatherings</span>
+                    <h2 class="heading-lg" style="font-size: 2.2rem;">Corporate Events & Private Rooms</h2>
+                    <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
+                        Need a sophisticated space for a business lunch or a private birthday dinner? 
+                        Our private dining room offers seclusion, state-of-the-art presentation 
+                        technology, and a customized dining experience for groups of 10 to 30. We also 
+                        provide full-service external catering for events throughout the city. We can 
+                        cater to any dietary requirements.
+                    </p>
+                    <ul style="margin-bottom: 2rem;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> Flexible Seating Arrangements</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> A/V Equipment Available</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 10px;"></i> Full External Catering Service</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">View Private Dining Menu</a>
+                </div>
+                <div class="events-image-col events-img-wrapper reveal">
+                    <img src="images/Private-Dining-Menu.jpg" alt="Corporate event setup in private room" class="about-img" style="border-radius: 12px; height: 400px; margin-bottom: 0;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="section-padding" style="background: var(--secondary-bg);">
+        <div class="container">
+            <h2 class="heading-lg text-center reveal" style="text-align: center; margin-bottom: 3rem;">Customer Reviews</h2>
+            <div class="reviews-slider reveal">
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p style="margin-bottom: 1rem;">"The best spot in town. The coffee is out of this world and the service is impeccable."</p>
+                    <h4 style="color: var(--accent-color);">Kenaket.k</h4>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p style="margin-bottom: 1rem;">"Amazing atmosphere. I love working from here, the wifi is fast and the food is great."</p>
+                    <h4 style="color: var(--accent-color);">Keresa.B</h4>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p style="margin-bottom: 1rem;">"A true gem in Bole. Highly recommended for dinner dates."</p>
+                    <h4 style="color: var(--accent-color);">Abebech.t</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Map -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="contact-container reveal">
+                <div class="contact-form">
+                    <span class="text-gradient">Get In Touch</span>
+                    <h2 class="heading-lg">Book A Table</h2>
+                    <form onsubmit="event.preventDefault(); alert('Reservation Submitted!');">
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Date & Time">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-input" rows="4" placeholder="Special Request"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Confirm Booking</button>
+                    </form>
+                </div>
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1365.2764282814846!2d36.54873252704824!3d9.089054333343066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1653010047e52813%3A0xf3b1d69ea152eb9f!2sBole%20cafe%20Nekemte!5e1!3m2!1sen!2set!4v1765898537662!5m2!1sen!2set" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="logo">Bole<span>Cafe</span>.</a>
+                    <p style="margin-top: 1rem;">The premier destination for coffee and fine dining in Nekemte.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul style="line-height: 2;">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#private-dining">Private Dining</a></li> 
+                        <li><a href="#contact">Reservation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul style="line-height: 2;">
+                        <li>Nekemte</li>
+                        <li>+251 931333366</li>
+                        <li>www.bolenk@gmail.com</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 Bole Cafe. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+<script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggling Function
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function toggleMobileMenu() {
+            // Toggles the 'active' class for the slide-down animation
+            navMenu.classList.toggle('active');
+            // Toggles the 'open' class for the hamburger icon animation
+            menuBtn.classList.toggle('open'); 
+        }
+
+        // 1. Listen for hamburger click to open/close
+        menuBtn.addEventListener('click', toggleMobileMenu);
+
+        // 2. Listen for link clicks inside the menu to close it (The requested feature)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Check if the menu is currently active (only needed if media query applies)
+                if (navMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Scroll Animations
+        window.addEventListener('scroll', reveal);
+
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 180; 
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        
+        // Menu Slider Logic
+        function scrollMenu(direction) {
+            const container = document.getElementById('menu-slider');
+            const scrollAmount = 340; 
+            
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        // --- UPDATED: Hero Image Cycling Logic with Cross-Fade ---
+        const images = [
+            "images/coffee.jfif",
+            "images/cake.jpg"
+        ];
+        let currentImageIndex = 0;
+        const img1 = document.getElementById('hero-img-1');
+        const img2 = document.getElementById('hero-img-2');
+        let activeImg = img1;
+        let nextImg = img2;
+
+        function cycleImages() {
+            // Determine the next image URL
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            const nextImageUrl = images[currentImageIndex];
+
+            // Load the next image into the currently hidden element (nextImg)
+            nextImg.src = nextImageUrl;
+            
+            // Wait for the image to load before fading (optional but good practice)
+            // For placeholder images, this is fast, but crucial for real assets
+            nextImg.onload = () => {
+                // 1. Hide the active image (start the fade-out)
+                activeImg.classList.remove('active');
+                
+                // 2. Show the next image (start the fade-in)
+                nextImg.classList.add('active');
+                
+                // 3. Swap the roles: activeImg becomes the new hidden one, nextImg becomes the new active one
+                // This prepares the cycle for the next iteration
+                [activeImg, nextImg] = [nextImg, activeImg];
+            };
+        }
+        
+        // Cycle every 5500ms (5.5 seconds). Since the transition is 1.5s, this gives a 4s display time.
+        const imageInterval = 5500; 
+
+        // Initial setup and start interval
+        window.onload = function() {
+            setInterval(cycleImages, imageInterval);
+            // Trigger scroll reveal
+            reveal();
+        }
+
+    </script>
+</body>
+</html>
